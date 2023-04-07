@@ -50,7 +50,14 @@ const paddle = {
     speed: 8,
     dx: 0
 }
-
+const randBlock = {
+    x : (Math.floor((Math.random()* canvas.width)/10))*10,
+    y : (Math.floor((Math.random()* canvas.height)/10))*10,
+    w: 80,
+    h: 20,
+    speed: 8,
+    dy : 4
+}
 //Draw ball onto canvas
 function drawBall(){
     cntxt.beginPath();
@@ -70,7 +77,16 @@ function drawPaddle(){
     cntxt.closePath();
 }
 
+function drawRandomBlock(){
+    cntxt.beginPath();
+    
 
+    cntxt.rect(randBlock.x, randBlock.y, randBlock.w, randBlock.h);
+    cntxt.fillStyle = '#ff00ff';
+    cntxt.fill();
+    cntxt.closePath();
+}
+// drawRandomBlock();
 //Function to draw blocks on the canvas
 function drawBlocks(){
     blocks.forEach(column => {
@@ -78,7 +94,9 @@ function drawBlocks(){
             cntxt.beginPath();
             cntxt.rect(block.x, block.y, block.w, block.h);
             cntxt.fillStyle = block.visible ? '#d300d3' : 'transparent';
-            if(isGameOver || isGamePaused) cntxt.fillStyle = block.visible ? '#0000ff' : 'transparent';
+            if(isGameOver || isGamePaused) {
+                //GameOver();
+            }
             cntxt.fill();
             cntxt.closePath();
         })
@@ -87,7 +105,7 @@ function drawBlocks(){
 
 //Drawing score on the canvas
 function drawScore(){
-    
+    document.getElementById('score').innerHTML = score;
 }
 
 //Function to move paddle on the canvas
@@ -143,7 +161,7 @@ function moveBall(){
     blocks.forEach(column => {
         column.forEach(block => {
             if(block.visible){
-                
+                // if(ball.x >= block[column].x && ball.x <= block[column].x+blockProp.w && ball.y <= block[column].y && ball)
             }
         });
     });
@@ -185,16 +203,20 @@ function draw(){
     //clear canvas first
     cntxt.clearRect(0, 0, canvas.width, canvas.height);
     drawBall();
+    drawRandomBlock();
     drawScore();
     drawPaddle();
     drawBlocks();
 }
-
+function moveRandBlock(){
+    randBlock.y += randBlock.dy;
+    if(randBlock.y >= canvas.height) drawRandomBlock();
+}
 //Update canvas animation and drawing
 function update(){
     movePaddle();
     moveBall();
-
+    moveRandBlock();
     //Drawing eveything in the update function
     draw();
 
