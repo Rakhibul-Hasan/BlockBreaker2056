@@ -188,7 +188,8 @@ function showAllBlocks(){
 }
 
 function showGamePauseText(){
-    
+    if(isGamePaused) document.getElementById('GameOver').innerHTML = "Game Paused";
+    else document.getElementById('GameOver').innerHTML = " ";
 }
 
 function showLevelCompleteText(){
