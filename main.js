@@ -5,7 +5,7 @@ const cntxt = canvas.getContext('2d');
 let isGamePaused = false;
 let isGameOver = false;
 let score = 0;
-
+let hit = 0;
 //Number of rows and columns
 const blockRowCount = 6;
 const blockColumnCount = 9;
@@ -72,7 +72,7 @@ function drawPaddle(){
     cntxt.beginPath();
     cntxt.rect(paddle.x, paddle.y, paddle.w, paddle.h);
     cntxt.fillStyle = '#d300d3';
-    if(isGameOver || isGamePaused) cntxt.fillStyle = '#0000ff';
+    
     cntxt.fill();
     cntxt.closePath();
 }
@@ -222,9 +222,9 @@ function update(){
 
     screen = requestAnimationFrame(update);
     if (score == (blockColumnCount*blockRowCount)) {
-        
+        document.getElementById('GameOver').innerHTML = "You Won!";
     }else if(isGameOver){
-        
+        document.getElementById('GameOver').innerHTML = "Game Over!";
     }
 }
 
