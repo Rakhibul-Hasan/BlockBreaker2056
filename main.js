@@ -148,7 +148,7 @@ function moveBall(){
 
     //Lose on missing paddle
     if(ball.y + ball.size > canvas.height){
-        
+        document.getElementById('GameOver').innerHTML = "Game Over!";
     }
 }
 
