@@ -65,6 +65,7 @@ function drawPaddle(){
     cntxt.beginPath();
     cntxt.rect(paddle.x, paddle.y, paddle.w, paddle.h);
     cntxt.fillStyle = '#d300d3';
+    if(isGameOver || isGamePaused) cntxt.fillStyle = '#0000ff';
     cntxt.fill();
     cntxt.closePath();
 }
@@ -77,6 +78,7 @@ function drawBlocks(){
             cntxt.beginPath();
             cntxt.rect(block.x, block.y, block.w, block.h);
             cntxt.fillStyle = block.visible ? '#d300d3' : 'transparent';
+            if(isGameOver || isGamePaused) cntxt.fillStyle = block.visible ? '#0000ff' : 'transparent';
             cntxt.fill();
             cntxt.closePath();
         })
@@ -149,6 +151,7 @@ function moveBall(){
     //Lose on missing paddle
     if(ball.y + ball.size > canvas.height){
         document.getElementById('GameOver').innerHTML = "Game Over!";
+        isGameOver = true;
     }
 }
 
