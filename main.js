@@ -132,7 +132,10 @@ function moveBall(){
     }
     // moveBall();
     //Paddle collision functionality
-    
+    if(ball.x >= paddle.x && ball.x <= paddle.x+paddle.w && ball.y >= canvas.height-40 )
+    {
+        ball.dy = -4;
+    }
 
     //Block collision functionality
     blocks.forEach(column => {
